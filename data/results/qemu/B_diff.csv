@@ -1,0 +1,4 @@
+payload,comparison,metric,d_median,d_median_lo,d_median_hi,d_median_signif,d_p99,d_p99_lo,d_p99_hi,d_p99_signif
+1,MT-MC,latency,-151.280,-167.559,-151.280,1,-2926.320,-16762.749,4151.844,0
+1,MT-MC,exec,0.000,0.000,0.000,0,0.000,-488.720,2394.640,0
+1,MT-MC,response,-151.280,-159.480,-151.280,1,-2766.800,-14119.440,5219.840,0

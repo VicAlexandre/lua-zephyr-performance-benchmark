@@ -1,0 +1,114 @@
+# sessão bateria em 2026-11-04T00:27:59
+tcc-experimentos sem commit (com alterações não commitadas; código em source-20261104-002759.tar.gz)
+opções {'target': 'zbook', 'runs': 10, 'port': '/dev/ttyACM0', 'only': '', 'timeout': 3600, 'quick': False, 'fresh': False, 'allow_dirty': True, 'exps': 'A,B,C', 'detach': False}
+manifest:
+  group-filter:
+  - -babblesim
+  - -optional
+  - -testing
+  projects:
+  - name: zephyr
+    url: https://github.com/zephyrproject-rtos/zephyr
+    revision: 41d10b59730406bbab4ca9f1fbbe9e96aafb4966
+    clone-depth: 1
+    west-commands: scripts/west-commands.yml
+  - name: lua_zephyr
+    url: https://github.com/zano-systems/lua_zephyr
+    revision: bd871dfbdad33b72010344e5a697d6ffe74b25de
+    path: modules/lang/lua_zephyr
+    submodules: true
+  - name: zbook
+    url: https://github.com/zephyr-book/zbook
+    revision: 530df5dc6e51823b0eafb1f639ce86da6029fa8f
+    path: modules/boards/zbook
+  - name: cmsis_6
+    url: https://github.com/zephyrproject-rtos/CMSIS_6
+    revision: 1c1840af7a7e757d6e2fec3ddb0e5ce0dfcc93c8
+    path: modules/hal/cmsis_6
+    groups:
+    - hal
+  - name: hal_rpi_pico
+    url: https://github.com/zephyrproject-rtos/hal_rpi_pico
+    revision: 2e9dbf14fa56e5907aefb07e8e75010ec5210946
+    path: modules/hal/rpi_pico
+    groups:
+    - hal
+  self:
+    path: tcc-experimentos
+
+# sessão bateria em 2026-11-04T18:50:18
+tcc-experimentos sem commit (com alterações não commitadas; código em source-20261104-185018.tar.gz)
+opções {'target': 'zbook', 'runs': 10, 'port': '/dev/ttyACM0', 'only': '', 'timeout': 3600, 'quick': False, 'fresh': False, 'allow_dirty': True, 'exps': 'A,B,C', 'detach': False}
+manifest:
+  group-filter:
+  - -babblesim
+  - -optional
+  - -testing
+  projects:
+  - name: zephyr
+    url: https://github.com/zephyrproject-rtos/zephyr
+    revision: 41d10b59730406bbab4ca9f1fbbe9e96aafb4966
+    clone-depth: 1
+    west-commands: scripts/west-commands.yml
+  - name: lua_zephyr
+    url: https://github.com/zano-systems/lua_zephyr
+    revision: bd871dfbdad33b72010344e5a697d6ffe74b25de
+    path: modules/lang/lua_zephyr
+    submodules: true
+  - name: zbook
+    url: https://github.com/zephyr-book/zbook
+    revision: 530df5dc6e51823b0eafb1f639ce86da6029fa8f
+    path: modules/boards/zbook
+  - name: cmsis_6
+    url: https://github.com/zephyrproject-rtos/CMSIS_6
+    revision: 1c1840af7a7e757d6e2fec3ddb0e5ce0dfcc93c8
+    path: modules/hal/cmsis_6
+    groups:
+    - hal
+  - name: hal_rpi_pico
+    url: https://github.com/zephyrproject-rtos/hal_rpi_pico
+    revision: 2e9dbf14fa56e5907aefb07e8e75010ec5210946
+    path: modules/hal/rpi_pico
+    groups:
+    - hal
+  self:
+    path: tcc-experimentos
+
+# sessão bateria em 2026-11-04T23:25:05
+tcc-experimentos sem commit (com alterações não commitadas; código em source-20261104-232505.tar.gz)
+opções {'target': 'zbook', 'runs': 10, 'port': '/dev/ttyACM0', 'only': '', 'timeout': 3600, 'quick': False, 'fresh': False, 'allow_dirty': True, 'exps': 'A,B,C', 'detach': False}
+manifest:
+  group-filter:
+  - -babblesim
+  - -optional
+  - -testing
+  projects:
+  - name: zephyr
+    url: https://github.com/zephyrproject-rtos/zephyr
+    revision: 41d10b59730406bbab4ca9f1fbbe9e96aafb4966
+    clone-depth: 1
+    west-commands: scripts/west-commands.yml
+  - name: lua_zephyr
+    url: https://github.com/zano-systems/lua_zephyr
+    revision: bd871dfbdad33b72010344e5a697d6ffe74b25de
+    path: modules/lang/lua_zephyr
+    submodules: true
+  - name: zbook
+    url: https://github.com/zephyr-book/zbook
+    revision: 530df5dc6e51823b0eafb1f639ce86da6029fa8f
+    path: modules/boards/zbook
+  - name: cmsis_6
+    url: https://github.com/zephyrproject-rtos/CMSIS_6
+    revision: 1c1840af7a7e757d6e2fec3ddb0e5ce0dfcc93c8
+    path: modules/hal/cmsis_6
+    groups:
+    - hal
+  - name: hal_rpi_pico
+    url: https://github.com/zephyrproject-rtos/hal_rpi_pico
+    revision: 2e9dbf14fa56e5907aefb07e8e75010ec5210946
+    path: modules/hal/rpi_pico
+    groups:
+    - hal
+  self:
+    path: tcc-experimentos
+

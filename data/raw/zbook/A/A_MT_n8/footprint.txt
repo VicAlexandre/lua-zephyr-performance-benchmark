@@ -1,0 +1,4 @@
+fits=1
+flash_bin=110580
+flash_used=110580
+ram_used=266628

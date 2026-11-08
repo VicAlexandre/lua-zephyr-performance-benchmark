@@ -1,0 +1,6 @@
+#BOOT zephyr=4.5.0 board=zbook@p2/rp2350b/m33
+#BENCH exp=A model=MC ntasks=8 seed=20261103 warmup=100 samples=1000 hz=150000000 payload_t4=8 slice_us=1000 slot_bytes=5
+#PROBE where=c cycles=1
+#GEN pub_errors=0 t1=10
+#HEAP name=mc size=53164 peak=40472 alloc_fail=0
+#END

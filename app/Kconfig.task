@@ -1,0 +1,26 @@
+config BENCH_$(task)_ENABLE
+	bool "Archetype $(task) activated by the generator"
+	help
+	  Enabled by CMake when some task of the archetype exists in the
+	  configuration.
+
+config BENCH_$(task)_SPORADIC
+	bool
+	default $(sporadic)
+
+config BENCH_$(task)_PERIOD_MS
+	int "$(task): period (periodic) or minimum interarrival time (sporadic), in ms"
+	default $(period)
+
+config BENCH_$(task)_C_US
+	int "$(task): computation time C_i, in us"
+	default $(c_us)
+
+config BENCH_$(task)_M_BYTES
+	int "$(task): memory allocated per instance M_i, in bytes"
+	default $(m_bytes)
+
+config BENCH_$(task)_P_BYTES
+	int "$(task): payload size P_i, in bytes"
+	range 1 1024
+	default $(p_bytes)

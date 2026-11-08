@@ -1,0 +1,11 @@
+#BOOT zephyr=4.5.0 board=zbook@p2/rp2350b/m33
+#BENCH exp=A model=MT ntasks=6 seed=20261103 warmup=100 samples=1000 hz=150000000 payload_t4=8 slice_us=1000 slot_bytes=5
+#PROBE where=c cycles=1
+#GEN pub_errors=0 t1=10 t2=1 t3=1 t4=6 t5=1 t6=1
+#HEAP name=t1_00 size=63820 peak=19344 alloc_fail=0
+#HEAP name=t2_01 size=63996 peak=24960 alloc_fail=0
+#HEAP name=t3_02 size=64000 peak=32640 alloc_fail=0
+#HEAP name=t4_03 size=63916 peak=18028 alloc_fail=0
+#HEAP name=t5_04 size=63908 peak=21844 alloc_fail=0
+#HEAP name=t6_05 size=63992 peak=17760 alloc_fail=0
+#END

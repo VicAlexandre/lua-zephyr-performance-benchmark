@@ -1,0 +1,223 @@
+#BOOT zephyr=4.5.0 board=zbook@p2/rp2350b/m33
+Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544  Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036  Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036  Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     1103Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036 Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036Something went wrong with allocation
+Something went wrong with allocation
+Lua error: not enough memory
+-- Lua thread memory report:
+         size  max used    unused  usage
+heap:   12544     11036    11036     12460    87%
+     12460    87%
+    12460    87%
+    12460    87%
+    12460    87%
+     12460    87%
+     12460    87%
+    12460    87%
+    12460    87%
+    12460    87%
+    12460    87%
+     12460    87%
+     12460    87%
+     12460    87%
+   12460    87%
+   12460    87%
+6     12460    87%
+    12460    87%
+    12460    87%
+    12460    87%
+     12460    87%
+     12460    87%
+    12460    87%
+    12460    87%
+     12460    87%
+     12460    87%
+     12460    87%
+    12460    87%
+     12460    87%
+     12460    87%
+    12460    87%
+#ERROR ready timeout
+#BENCH exp=A model=MT ntasks=31 seed=20261103 warmup=100 samples=1000 hz=150000000 payload_t4=8 slice_us=1000 slot_bytes=5
+#PROBE where=c cycles=1
+#GEN pub_errors=8 t1=10
+#HEAP name=t1_00 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_01 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_02 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_03 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_04 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_05 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_06 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_07 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_08 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_09 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_10 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_11 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_12 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_13 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_14 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_15 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_16 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_17 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_18 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_19 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_20 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_21 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_22 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_23 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_24 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_25 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_26 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_27 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_28 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_29 size=12460 peak=11036 alloc_fail=2
+#HEAP name=t1_30 size=12460 peak=11036 alloc_fail=2
+#END

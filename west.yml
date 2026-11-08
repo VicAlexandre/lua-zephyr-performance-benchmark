@@ -1,0 +1,32 @@
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+    - name: zano-systems
+      url-base: https://github.com/zano-systems
+    - name: zephyr-book
+      url-base: https://github.com/zephyr-book
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: d6e5dc6ae358a6bbe05d040e0428e4161f09d006
+      clone-depth: 1
+      import:
+        name-allowlist:
+          - cmsis_6
+          - hal_rpi_pico
+
+    - name: lua_zephyr
+      remote: zano-systems
+      revision: bd871dfbdad33b72010344e5a697d6ffe74b25de
+      path: modules/lang/lua_zephyr
+      submodules: true
+
+    - name: zbook
+      remote: zephyr-book
+      revision: 530df5dc6e51823b0eafb1f639ce86da6029fa8f
+      path: modules/boards/zbook
+
+  self:
+    path: lua-zephyr-performance-benchmark

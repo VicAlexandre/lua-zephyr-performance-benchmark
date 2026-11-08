@@ -1,0 +1,155 @@
+mainmenu "lua_zephyr concurrency benchmark"
+
+menu "Experiments"
+
+choice BENCH_EXP
+	prompt "Experiment"
+	default BENCH_EXP_B
+
+config BENCH_EXP_CAL
+	bool "Calibration (probe cost and table slot size)"
+
+config BENCH_EXP_A
+	bool "Experiment A: footprint"
+
+config BENCH_EXP_B
+	bool "Experiment B: dispatch latency"
+
+config BENCH_EXP_C
+	bool "Experiment C: cooperative blocking"
+
+endchoice
+
+choice BENCH_MODEL
+	prompt "Concurrency model"
+	default BENCH_MODEL_MT
+
+config BENCH_MODEL_MT
+	bool "MT: one Lua thread per task"
+
+config BENCH_MODEL_MC
+	bool "MC: coroutines of one async thread"
+
+config BENCH_MODEL_BASE
+	bool "Baseline: C receiver, no Lua"
+
+config BENCH_MODEL_NONE
+	bool "Reference: no tasks (fixed part of the footprint)"
+
+endchoice
+
+config BENCH_NTASKS
+	int "Number of Lua tasks in the configuration"
+	default 0
+	help
+	  Set by CMake. The generator waits for all of them to signal readiness
+	  before the first activation.
+
+config BENCH_MEASURED_TASK
+	int "Archetype whose timestamps are recorded (0 = none)"
+	default 4 if BENCH_EXP_B || BENCH_EXP_C
+	default 0
+
+config BENCH_SEED
+	int "Pseudorandom generator seed"
+	default 20261103
+
+config BENCH_WARMUP
+	int "Warm-up samples (discarded in the analysis)"
+	default 100
+
+config BENCH_SAMPLES
+	int "Samples collected after the warm-up"
+	default 1000
+
+config BENCH_RUN_MS
+	int "Duration of a run without timing samples (Experiment A), in ms"
+	default 10000
+
+config BENCH_SLICE_US
+	int "Experiment C: duration S of each background task slice, in us"
+	default 1000
+
+config BENCH_T5_PUBS
+	int "T5: back-to-back publications per activation"
+	default 10
+
+config BENCH_SLOT_BYTES
+	int "Bytes per Lua table slot (calibration)"
+	default 8
+	help
+	  Used to convert M_i into a number of table slots.
+
+config BENCH_GEN_PRIORITY
+	int "Stimulus generator thread priority"
+	default 2
+
+config BENCH_GEN_STACK_SIZE
+	int "Stimulus generator thread stack size"
+	default 2048
+
+config BENCH_DIAG_GC
+	bool "Diagnostic: record the end of each garbage collector cycle"
+	help
+	  The measured task keeps a sentinel object with __gc; each collection
+	  of it marks the end of a cycle and records the time and the latest
+	  activation. Diagnostic only: disabled in the measurements.
+
+config BENCH_DIAG_COLS
+	bool "Diagnostic: extra timestamps per activation (generator and work loop)"
+	help
+	  d0: return of zbus_chan_pub in the generator; d1: generator about to
+	  sleep; d2 and d3: start and end of the work loop in the task body.
+	  Diagnostic only: disabled in the measurements.
+
+task = T1
+sporadic = n
+period = 1000
+c_us = 500
+m_bytes = 64
+p_bytes = 8
+rsource "Kconfig.task"
+
+task = T2
+sporadic = n
+period = 10000
+c_us = 50000
+m_bytes = 4096
+p_bytes = 8
+rsource "Kconfig.task"
+
+task = T3
+sporadic = n
+period = 10000
+c_us = 5000
+m_bytes = 8192
+p_bytes = 16
+rsource "Kconfig.task"
+
+task = T4
+sporadic = y
+period = 1000
+c_us = 200
+m_bytes = 0
+p_bytes = 8
+rsource "Kconfig.task"
+
+task = T5
+sporadic = n
+period = 10000
+c_us = 0
+m_bytes = 2048
+p_bytes = 64
+rsource "Kconfig.task"
+
+task = T6
+sporadic = y
+period = 5000
+c_us = 500
+m_bytes = 256
+p_bytes = 32
+rsource "Kconfig.task"
+
+endmenu
+
+source "Kconfig.zephyr"

@@ -1,0 +1,13 @@
+#BOOT zephyr=4.5.0 board=zbook@p2/rp2350b/m33
+#CAL work rep=1 iters=100000 cycles=6532574
+#CAL work rep=2 iters=100000 cycles=6513034
+#CAL work rep=3 iters=100000 cycles=6509394
+#CAL work rep=4 iters=100000 cycles=6507044
+#CAL work rep=5 iters=100000 cycles=6506949
+#CAL table slots=1000 bytes=5152
+#BENCH exp=CAL model=MT ntasks=0 seed=20261103 warmup=100 samples=1000 hz=150000000 payload_t4=8 slice_us=1000 iters_per_ms=2340 slot_bytes=5
+#PROBE where=c cycles=1
+#PROBE where=lua cycles=291
+#GEN pub_errors=0
+#HEAP name=cal size=31632 peak=19896 alloc_fail=0
+#END
