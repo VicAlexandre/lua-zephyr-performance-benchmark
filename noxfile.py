@@ -149,11 +149,24 @@ def _options(session: nox.Session) -> argparse.Namespace:
         action="store_true",
         help="run_all: run in the background, in a tmux session 'benchmark'",
     )
+    ap.add_argument(
+        "--seed-base",
+        type=int,
+        default=None,
+        help="give each repetition its own generator seed (base + run index), sent "
+        "over the console at boot; data go to data/raw/zbook_seeds",
+    )
     return ap.parse_args(session.posargs)
 
 
 def _data(opts: argparse.Namespace) -> Path:
-    return DATA_ROOT / "zbook"
+    return DATA_ROOT / ("zbook" if opts.seed_base is None else "zbook_seeds")
+
+
+def _run_seed(opts: argparse.Namespace, run: int) -> int | None:
+    """Seed of a repetition: the same for every model, so that the models
+    stay paired within each repetition."""
+    return None if opts.seed_base is None else opts.seed_base + run
 
 
 def _cfg_build_dir(opts: argparse.Namespace, cfg: Config) -> Path:
@@ -213,6 +226,7 @@ def _build_cfg(
         str(APP),
         "--",
         *cfg.cmake_args(),
+        *(["-DCONFIG_BENCH_SEED_FROM_CONSOLE=y"] if opts.seed_base is not None else []),
     ]
     session.log(f"building {cfg.name}")
     proc = subprocess.run(cmd, capture_output=True, text=True)
@@ -230,6 +244,8 @@ def _validate(text: str) -> list[str]:
     problems = []
     if "Lua error" in text:
         problems.append("Lua error during the run")
+    if "#WARN seed not received" in text:
+        problems.append("seed not received over the console")
     m = re.search(r"#GEN pub_errors=(\d+)", text)
     if m is None:
         problems.append("no #GEN line")
@@ -256,6 +272,7 @@ def _capture(
     cfg: Config,
     out: Path,
     strict: bool = True,
+    seed: int | None = None,
 ) -> tuple[Path, list[str]]:
     """Run and validate. With strict, an invalid run aborts the session;
     without strict, the problems are returned for the caller to decide."""
@@ -269,6 +286,8 @@ def _capture(
         opts.port,
         "--timeout",
         str(opts.timeout),
+        *(["--seed", str(seed if seed is not None else opts.seed_base)]
+          if opts.seed_base is not None else []),
         external=True,
     )
     problems = _validate(out.read_text())
@@ -315,7 +334,7 @@ def _run_interleaved(
             for cfg in sized:
                 out = _run_path(opts, exp, cfg, run)
                 if not _done(opts, out):
-                    _capture(session, opts, cfg, out)
+                    _capture(session, opts, cfg, out, seed=_run_seed(opts, run))
 
 
 def _heap_lines(path: Path) -> list[dict[str, str]]:
@@ -365,6 +384,12 @@ def _size_heaps(
         return (cfg, log) if log is not None else None
 
     heaps_file = exp_dir / cfg.name / "heaps.txt"
+    if opts.seed_base is not None and not heaps_file.exists():
+        # reuse the sizing of the fixed-seed data, so both datasets share the heaps
+        orig = DATA_ROOT / "zbook" / exp_dir.name / cfg.name / "heaps.txt"
+        if orig.exists() and not opts.fresh:
+            heaps_file.parent.mkdir(parents=True, exist_ok=True)
+            heaps_file.write_text(orig.read_text())
     if heaps_file.exists() and not opts.fresh:
         sized = {
             **cfg.args,

@@ -165,9 +165,9 @@ static const char *model_name(void)
 
 void bench_dump(void)
 {
-	printk("#BENCH exp=%s model=%s ntasks=%d seed=%d warmup=%d samples=%d hz=%u "
+	printk("#BENCH exp=%s model=%s ntasks=%d seed=%u warmup=%d samples=%d hz=%u "
 	       "payload_t4=%d slice_us=%d slot_bytes=%d\n",
-	       exp_name(), model_name(), CONFIG_BENCH_NTASKS, CONFIG_BENCH_SEED,
+	       exp_name(), model_name(), CONFIG_BENCH_NTASKS, bench_seed,
 	       CONFIG_BENCH_WARMUP, CONFIG_BENCH_SAMPLES, bench_hz(), CONFIG_BENCH_T4_P_BYTES,
 	       CONFIG_BENCH_SLICE_US, CONFIG_BENCH_SLOT_BYTES);
 	printk("#PROBE where=c cycles=%u\n", bench_probe_cost_c());
