@@ -15,7 +15,7 @@ Reads the raw data from data/raw and writes CSV tables to data/results:
 
 Usage:
     python analysis/analyze.py [--raw data/raw] [--out data/results]
-                               [--reps 10000] [--seed 1]
+                               [--reps 10000] [--seed 1] [--exps A,B,C]
 """
 
 import argparse
@@ -264,12 +264,17 @@ def main() -> None:
     ap.add_argument("--out", type=Path, default=Path("data/results"))
     ap.add_argument("--reps", type=int, default=10_000)
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--exps", default="A,B,C", help="experiments to analyze")
     args = ap.parse_args()
+    exps = {e.strip().upper() for e in args.exps.split(",")}
 
     rng = np.random.default_rng(args.seed)
-    analyze_a(args.raw, args.out)
-    analyze_b(args.raw, args.out, args.reps, rng)
-    analyze_c(args.raw, args.out, args.reps, rng)
+    if "A" in exps:
+        analyze_a(args.raw, args.out)
+    if "B" in exps:
+        analyze_b(args.raw, args.out, args.reps, rng)
+    if "C" in exps:
+        analyze_c(args.raw, args.out, args.reps, rng)
 
 if __name__ == "__main__":
     main()

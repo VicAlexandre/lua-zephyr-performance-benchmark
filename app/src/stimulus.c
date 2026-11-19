@@ -1,5 +1,8 @@
+#include <stdlib.h>
 #include <string.h>
 
+#include <zephyr/device.h>
+#include <zephyr/drivers/uart.h>
 #include <zephyr/kernel.h>
 #include <zephyr/sys/printk.h>
 #include <zephyr/zbus/zbus.h>
@@ -41,7 +44,8 @@ GEN_MSG(6);
 static struct gen_task tasks[] = {GEN_TASK(1), GEN_TASK(2), GEN_TASK(3),
 				  GEN_TASK(4), GEN_TASK(5), GEN_TASK(6)};
 
-static uint32_t rng_state = CONFIG_BENCH_SEED;
+uint32_t bench_seed = CONFIG_BENCH_SEED;
+static uint32_t rng_state;
 
 static struct gen_task *diag_pending;
 static uint32_t diag_seq;
@@ -57,6 +61,46 @@ static uint32_t rng_next(void)
 	rng_state = x;
 	return x;
 }
+
+#ifdef CONFIG_BENCH_SEED_FROM_CONSOLE
+static void read_seed(void)
+{
+	const struct device *uart = DEVICE_DT_GET(DT_CHOSEN(zephyr_console));
+	int64_t deadline = k_uptime_get() + CONFIG_BENCH_SEED_WAIT_MS;
+	char buf[24];
+	size_t n = 0;
+	unsigned char c;
+
+	printk("#SEED?\n");
+	while (k_uptime_get() < deadline) {
+		if (uart_poll_in(uart, &c) != 0) {
+			k_msleep(1);
+			continue;
+		}
+		if (c == '\r') {
+			continue;
+		}
+		if (c != '\n') {
+			if (n < sizeof(buf) - 1) {
+				buf[n++] = c;
+			}
+			continue;
+		}
+		buf[n] = '\0';
+		n = 0;
+		if (strncmp(buf, "seed=", 5) == 0) {
+			char *end;
+			unsigned long v = strtoul(buf + 5, &end, 10);
+
+			if (end != buf + 5 && *end == '\0' && v != 0) {
+				bench_seed = (uint32_t)v;
+				return;
+			}
+		}
+	}
+	printk("#WARN seed not received, using %u\n", bench_seed);
+}
+#endif
 
 static k_ticks_t interval(const struct gen_task *t)
 {
@@ -106,6 +150,11 @@ static void gen_thread(void *p1, void *p2, void *p3)
 	}
 
 	struct gen_task *measured = NULL;
+
+#ifdef CONFIG_BENCH_SEED_FROM_CONSOLE
+	read_seed();
+#endif
+	rng_state = bench_seed;
 
 	for (size_t i = 0; i < ARRAY_SIZE(tasks); i++) {
 		struct gen_task *t = &tasks[i];

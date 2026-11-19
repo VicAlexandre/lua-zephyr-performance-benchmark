@@ -2,10 +2,13 @@
 
 Each run starts from a reset: the script opens the Zbook serial port, flashes
 the image with `west flash` (which resets the board) and reads the console
-up to the `#END` line.
+up to the `#END` line. With --seed, answers the `#SEED?` prompt of an image
+built with CONFIG_BENCH_SEED_FROM_CONSOLE, so that each run of the same image
+uses its own seed.
 
 Usage:
     python scripts/capture.py BUILD_DIR OUTPUT.txt [--port /dev/ttyACM0] [--timeout 1800]
+                              [--seed N]
 """
 
 import argparse
@@ -16,6 +19,7 @@ import threading
 from pathlib import Path
 
 END = "#END"
+SEED_PROMPT = "#SEED?"
 
 
 def west_flash_cmd(build_dir: Path) -> list[str]:
@@ -28,7 +32,9 @@ def west_flash_cmd(build_dir: Path) -> list[str]:
     return cmd
 
 
-def capture_zbook(build_dir: Path, port: str, baud: int, timeout: float) -> list[str]:
+def capture_zbook(
+    build_dir: Path, port: str, baud: int, timeout: float, seed: int | None = None
+) -> list[str]:
     import serial
 
     lines: list[str] = []
@@ -51,6 +57,8 @@ def capture_zbook(build_dir: Path, port: str, baud: int, timeout: float) -> list
                 for raw in complete:
                     line = raw.decode(errors="replace").rstrip("\r")
                     lines.append(line)
+                    if seed is not None and line.startswith(SEED_PROMPT):
+                        ser.write(f"seed={seed}\n".encode())
                     if line.startswith(END):
                         done.set()
 
@@ -77,9 +85,10 @@ def main() -> int:
     ap.add_argument("--port", default="/dev/ttyACM0")
     ap.add_argument("--baud", type=int, default=115200)
     ap.add_argument("--timeout", type=float, default=1800)
+    ap.add_argument("--seed", type=int, help="answer the #SEED? prompt with this seed")
     args = ap.parse_args()
 
-    lines = capture_zbook(args.build_dir, args.port, args.baud, args.timeout)
+    lines = capture_zbook(args.build_dir, args.port, args.baud, args.timeout, args.seed)
 
     if not any(line.startswith(END) for line in lines):
         sys.stderr.write("\n".join(lines[-20:]) + "\n")

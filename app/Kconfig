@@ -54,6 +54,19 @@ config BENCH_SEED
 	int "Pseudorandom generator seed"
 	default 20261103
 
+config BENCH_SEED_FROM_CONSOLE
+	bool "Read the generator seed from the console at boot"
+	help
+	  The generator prints "#SEED?" and waits for a line "seed=N" on the
+	  console UART before the run starts, so that each run of the same
+	  image can use a different seed. Without an answer within
+	  BENCH_SEED_WAIT_MS, BENCH_SEED is used and a warning is printed.
+
+config BENCH_SEED_WAIT_MS
+	int "Time to wait for the seed on the console, in ms"
+	depends on BENCH_SEED_FROM_CONSOLE
+	default 10000
+
 config BENCH_WARMUP
 	int "Warm-up samples (discarded in the analysis)"
 	default 100
