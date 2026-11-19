@@ -14,7 +14,6 @@ enum bench_point {
 
 #define BENCH_TOTAL (CONFIG_BENCH_WARMUP + CONFIG_BENCH_SAMPLES)
 
-/* Seed of the stimulus generator in this run (stimulus.c). */
 extern uint32_t bench_seed;
 
 static ALWAYS_INLINE uint32_t bench_cycles(void)

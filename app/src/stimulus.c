@@ -63,7 +63,6 @@ static uint32_t rng_next(void)
 }
 
 #ifdef CONFIG_BENCH_SEED_FROM_CONSOLE
-/* Ask the host for the seed of this run; see capture.py --seed. */
 static void read_seed(void)
 {
 	const struct device *uart = DEVICE_DT_GET(DT_CHOSEN(zephyr_console));
@@ -93,7 +92,6 @@ static void read_seed(void)
 			char *end;
 			unsigned long v = strtoul(buf + 5, &end, 10);
 
-			/* xorshift32 needs a nonzero state */
 			if (end != buf + 5 && *end == '\0' && v != 0) {
 				bench_seed = (uint32_t)v;
 				return;

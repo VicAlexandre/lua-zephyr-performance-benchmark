@@ -290,7 +290,10 @@ def _capture(
           if opts.seed_base is not None else []),
         external=True,
     )
-    problems = _validate(out.read_text())
+    text = out.read_text()
+    problems = _validate(text)
+    if seed is not None and not re.search(rf"^#BENCH .* seed={seed} ", text, re.M):
+        problems.append(f"board did not report seed {seed}")
     if problems:
         bad = out.with_suffix(".invalid.txt")
         out.replace(bad)
@@ -385,7 +388,6 @@ def _size_heaps(
 
     heaps_file = exp_dir / cfg.name / "heaps.txt"
     if opts.seed_base is not None and not heaps_file.exists():
-        # reuse the sizing of the fixed-seed data, so both datasets share the heaps
         orig = DATA_ROOT / "zbook" / exp_dir.name / cfg.name / "heaps.txt"
         if orig.exists() and not opts.fresh:
             heaps_file.parent.mkdir(parents=True, exist_ok=True)
