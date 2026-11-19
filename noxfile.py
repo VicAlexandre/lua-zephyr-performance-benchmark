@@ -630,18 +630,14 @@ def run_all(session: nox.Session) -> None:
 
 @nox.session
 def analyze(session: nox.Session) -> None:
-    """Statistical analysis and figures: data/raw/zbook -> data/results/zbook."""
+    """Statistical analysis and figures: A and B from data/raw/zbook, C from data/raw/zbook_seeds."""
+    script = ROOT / "analysis" / "analyze.py"
     raw, out = DATA_ROOT / "zbook", ROOT / "data" / "results" / "zbook"
-    session.run(
-        "python",
-        str(ROOT / "analysis" / "analyze.py"),
-        "--raw",
-        str(raw),
-        "--out",
-        str(out),
-        *session.posargs,
-        external=True,
-    )
+    raw_c, out_c = DATA_ROOT / "zbook_seeds", ROOT / "data" / "results" / "zbook_seeds"
+    session.run("python", str(script), "--raw", str(raw), "--out", str(out),
+                "--exps", "A,B", *session.posargs, external=True)
+    session.run("python", str(script), "--raw", str(raw_c), "--out", str(out_c),
+                "--exps", "C", *session.posargs, external=True)
     session.run(
         "python",
         str(ROOT / "analysis" / "plots.py"),
@@ -649,6 +645,8 @@ def analyze(session: nox.Session) -> None:
         str(out),
         "--raw",
         str(raw),
+        "--raw-c",
+        str(raw_c),
         "--out",
         str(out / "figures"),
         external=True,

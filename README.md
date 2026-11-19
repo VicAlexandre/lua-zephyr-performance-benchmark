@@ -98,8 +98,8 @@ To reproduce everything on a Zbook:
 nox -s calibrate     # writes app/calibration.conf (bytes per table slot)
 nox -s exp_a         # footprint: heap probing, heap = peak + 40 %, 10 runs
 nox -s exp_b         # dispatch latency: MT, MC and baseline, payloads 1 to 1024 B
-nox -s exp_c         # cooperative blocking: MC, MT with equal priorities and prioritized MT
-nox -s analyze       # tables and figures in data/results/zbook
+nox -s exp_c -- --seed-base 1000  # cooperative blocking: MC, MT with equal priorities and prioritized MT
+nox -s analyze       # tables and figures in data/results/zbook and zbook_seeds
 ```
 
 `nox -s run_all -- --detach` runs A, B and C unattended (about 11 h) in a
@@ -128,8 +128,9 @@ Each run writes one file:
 
 ## Collected data
 
-`data/raw/zbook/` holds the raw data from our Zbook, one directory per
-experiment and configuration. Each experiment directory has a `PROVENANCE.txt`
+`data/raw/zbook/` holds the raw data from our Zbook for experiments A and B,
+and `data/raw/zbook_seeds/` holds Experiment C, collected with a seed per run
+(`--seed-base 1000`), one directory per experiment and configuration. Each experiment directory has a `PROVENANCE.txt`
 with the frozen manifest and a `source-*.tar.gz` with the exact code that
 collected it. `nox -s analyze` turns it into the tables and figures in
-`data/results/zbook/`.
+`data/results/zbook/` (A, B and all figures) and `data/results/zbook_seeds/` (C).

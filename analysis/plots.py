@@ -1,7 +1,7 @@
 """Figures: footprint (CSVs from data/results) and histograms (raw data).
 
 Usage:
-    python analysis/plots.py [--results data/results/zbook] [--raw data/raw/zbook] [--out figures]
+    python analysis/plots.py [--results data/results/zbook] [--raw data/raw/zbook] [--raw-c data/raw/zbook_seeds] [--out figures]
 """
 
 import argparse
@@ -165,12 +165,13 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--results", type=Path, default=Path("data/results/zbook"))
     ap.add_argument("--raw", type=Path, default=Path("data/raw/zbook"))
+    ap.add_argument("--raw-c", type=Path, default=Path("data/raw/zbook_seeds"))
     ap.add_argument("--out", type=Path, default=Path("data/results/zbook/figures"))
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     fig_a_ram(args.results, args.out)
     fig_b_hist(args.raw, args.out)
-    fig_c_hist(args.raw, args.out)
+    fig_c_hist(args.raw_c, args.out)
 
 
 if __name__ == "__main__":
